@@ -1,19 +1,36 @@
 import {useState} from "react"
 import { useNavigate } from "react-router-dom"
 function Login_page(){
-    let[emailid,setEmailid]=useState("")
+    let[email,setEmail]=useState("")
     let[password,setPassword]=useState("")
 
     let [error,setError]=useState("")
 
     let navigate=useNavigate()
 
-    let handlelogin=(event)=>{
+    let handlelogin=async(event)=>{
         event.preventDefault()
-        if(emailid=="admin@gmail.com"&& password=="admin"){
-            navigate("/userhome")
+        if(email=="admin@gmail.com"&& password=="admin"){
+            navigate("/adminhome")
         }else{
-            setError("invalid credentials")
+            let req=await fetch("http://localhost:3000/api/emp/login",
+                {
+                    method:"POST",
+                    headers:{"Content-Type":"application/json"},
+                    body:JSON.stringify({email,password})    
+                });
+                let data=await req.json()
+                console.log(data);
+                if(data.user){
+                    if(data.user.role=="HR"){
+                        navigate("/hrhome");
+                    }else{
+                        navigate("/emphome")
+                    }
+
+                }else{
+                    setError(data.message);
+                }
         }
     }
     return(
@@ -22,9 +39,9 @@ function Login_page(){
             
         <form onSubmit={handlelogin}>
         <input type="text" 
-        value={emailid}
-        onChange={(e)=>setEmailid(e.target.value)}
-        placeholder="Enter emailid"></input><br/>
+        value={email}
+        onChange={(e)=>setEmail(e.target.value)}
+        placeholder="Enter email"></input><br/>
 
         <input type="password"
         value={password}

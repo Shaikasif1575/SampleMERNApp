@@ -4,6 +4,6 @@ class Student_model(BaseModel):
     stu_dept:str
     stu_age:int
     stu_mark:float
-class staff_model(BaseModel):
+class Staff_model(BaseModel):
     staff_name:str
-    staff_designation:str 
+    staff_designation:str

@@ -4,4 +4,5 @@ function UserHome(){
             <h1>Welcome user</h1>
         </div>
     )
-}export default UserHome
+}
+export default UserHome
