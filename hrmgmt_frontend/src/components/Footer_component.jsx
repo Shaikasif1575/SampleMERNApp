@@ -20,7 +20,7 @@ function Footer_components() {
                     {/* Copyright */}
                     <div className="col-md-4 mb-3 mb-md-0">
                         <p className="copyright-text mb-0">
-                            © 2026 Sathya. All Rights Reserved.
+                            © 2026 ASIF. All Rights Reserved.
                         </p>
                     </div>
 
